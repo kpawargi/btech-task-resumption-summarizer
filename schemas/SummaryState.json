@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/SummaryState.json",
+  "title": "SummaryState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "last_updated_utc",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_updated_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context", "progress", "decisions", "todos", "blockers", "evidence_refs"],
+      "properties": {
+        "context": { "type": "string" },
+        "progress": { "type": "string" },
+        "decisions": { "type": "string" },
+        "todos": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "description": "References to chunks supporting the summary",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["chunk_id"],
+            "properties": {
+              "chunk_id": { "type": "string", "pattern": "^chunk_[0-9]{4,}$" },
+              "note": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

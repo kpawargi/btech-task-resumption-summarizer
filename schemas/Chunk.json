@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/Chunk.json",
+  "title": "Chunk",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "chunk_id",
+    "source_type",
+    "text",
+    "token_count",
+    "char_start",
+    "char_end"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version string, e.g., v1"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "UUID for the session that produced this chunk",
+      "minLength": 8
+    },
+    "chunk_id": {
+      "type": "string",
+      "description": "Unique ID of the chunk within the session, e.g., chunk_0001",
+      "pattern": "^chunk_[0-9]{4,}$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["reading", "transcript", "code"]
+    },
+    "text": {
+      "type": "string",
+      "description": "Chunk text content",
+      "minLength": 1
+    },
+    "token_count": {
+      "type": "integer",
+      "description": "Estimated token count for the chunk",
+      "minimum": 1
+    },
+    "char_start": {
+      "type": "integer",
+      "description": "Start character offset in the cleaned document",
+      "minimum": 0
+    },
+    "char_end": {
+      "type": "integer",
+      "description": "End character offset in the cleaned document",
+      "minimum": 0
+    },
+    "meta": {
+      "type": "object",
+      "description": "Optional adapter-specific metadata",
+      "additionalProperties": true
+    }
+  }
+}
