@@ -1,0 +1,3 @@
+Speaker 1: Today we discussed the project plan. The main decision was to build a thin vertical slice first.
+Speaker 2: Yes, and we agreed the first slice should include capture, preprocess, and chunking.
+Speaker 1: Next steps are to implement adapters and save chunk sets to disk.
