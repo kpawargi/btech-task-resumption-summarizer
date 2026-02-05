@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/EventRecord.json",
+  "title": "EventRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "event_id",
+    "event_type",
+    "text",
+    "source_refs",
+    "created_utc"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Unique event identifier",
+      "pattern": "^evt_[A-Za-z0-9_-]{6,}$"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Type of extracted event",
+      "enum": ["ACTION", "DECISION", "TODO", "ISSUE", "NOTE"]
+    },
+    "text": {
+      "type": "string",
+      "description": "Human-readable event statement",
+      "minLength": 1
+    },
+    "entities": {
+      "type": "array",
+      "description": "Optional extracted entities",
+      "items": { "type": "string" }
+    },
+    "score": {
+      "type": "number",
+      "description": "Optional importance score (higher = more important)"
+    },
+    "source_refs": {
+      "type": "array",
+      "description": "Evidence references back to chunk spans",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["chunk_id"],
+        "properties": {
+          "chunk_id": {
+            "type": "string",
+            "pattern": "^chunk_[0-9]{4,}$"
+          },
+          "char_start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "char_end": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "created_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T"
+    }
+  }
+}
