@@ -1,0 +1,14 @@
+Today I focused on understanding task resumption in long-running software projects.
+I reviewed several recent research papers discussing cognitive load and how developers
+struggle to regain context after interruptions.
+
+I noticed that traditional to-do lists do not capture enough mental context,
+especially for complex research tasks that span multiple days.
+
+I also explored whether large language models could help reconstruct
+a developer’s mental state using partial activity logs and notes.
+
+Finally, I compared popular abstractive summarization models such as
+BART, T5, and PEGASUS to see which might be suitable for this project.
+Due to limited compute resources, I am leaning toward using BART-Base
+for the thin vertical slice of the system.

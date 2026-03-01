@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/ChunkSetIndex.json",
+  "title": "ChunkSetIndex",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "task_id",
+    "source_type",
+    "source_path",
+    "chunks"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema version string, e.g., v1"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "UUID for the session",
+      "minLength": 8
+    },
+    "task_id": {
+      "type": "string",
+      "description": "Task identifier",
+      "minLength": 1
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["reading", "transcript", "code"]
+    },
+    "source_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chunks": {
+      "type": "array",
+      "description": "Full chunk objects (same structure as Chunk.json)",
+      "minItems": 1,
+      "items": {
+        "$ref": "Chunk.json"
+      }
+    }
+  }
+}
