@@ -12,3 +12,12 @@ cd slice1_capture_preprocess
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+
+Local Model working
+
+```bat
+pip install streamlit
+pip install ctransformers
+```
