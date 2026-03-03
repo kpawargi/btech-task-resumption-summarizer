@@ -1,0 +1,3 @@
+Today I resumed reading a chapter on transformer models. The key idea is self-attention, which allows each token to attend to all others.
+I want a quick recap of what I understood last time. I also noted that long documents require chunking strategies.
+Finally, I planned to compare BART and T5 as baselines.

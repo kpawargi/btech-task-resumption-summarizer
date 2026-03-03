@@ -1,0 +1,14 @@
+diff --git a/app.py b/app.py
+index 2c174a1..a9d19af 100644
+--- a/app.py
++++ b/app.py
+@@ -1,5 +1,12 @@
+ def main():
+-    print("Hello")
++    print("Hello")
++    # TODO: Add preprocessing pipeline
++    # NOTE: Use chunking with token budget
++
++def preprocess(text):
++    # placeholder
++    return text

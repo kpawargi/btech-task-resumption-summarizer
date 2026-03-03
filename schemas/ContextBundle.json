@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/ContextBundle.json",
+  "title": "ContextBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "task_id",
+    "query",
+    "selected_chunks",
+    "selected_events",
+    "token_budget"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "query": {
+      "type": "string",
+      "description": "User's resume question/request",
+      "minLength": 1
+    },
+    "token_budget": {
+      "type": "integer",
+      "minimum": 32
+    },
+    "selected_chunks": {
+      "type": "array",
+      "description": "Ranked chunk texts (and IDs) selected by retriever",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["chunk_id", "text", "rank"],
+        "properties": {
+          "chunk_id": { "type": "string", "pattern": "^chunk_[0-9]{4,}$" },
+          "text": { "type": "string", "minLength": 1 },
+          "rank": { "type": "integer", "minimum": 1 },
+          "score": { "type": "number" }
+        }
+      }
+    },
+    "selected_events": {
+      "type": "array",
+      "description": "Ranked event records selected by retriever",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["event_id", "event_type", "text", "rank"],
+        "properties": {
+          "event_id": { "type": "string", "pattern": "^evt_[A-Za-z0-9_-]{6,}$" },
+          "event_type": {
+            "type": "string",
+            "enum": ["ACTION", "DECISION", "TODO", "ISSUE", "NOTE"]
+          },
+          "text": { "type": "string", "minLength": 1 },
+          "rank": { "type": "integer", "minimum": 1 },
+          "score": { "type": "number" }
+        }
+      }
+    },
+    "evidence_map": {
+      "type": "object",
+      "description": "Optional mapping to show which chunks support which events",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string", "pattern": "^chunk_[0-9]{4,}$" }
+      }
+    }
+  }
+}
