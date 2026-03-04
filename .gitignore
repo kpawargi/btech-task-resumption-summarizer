@@ -16,3 +16,6 @@ outputs/
 
 # Data (optional)
 data/raw/
+
+
+contextbundle.json
